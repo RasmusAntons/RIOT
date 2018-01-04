@@ -57,6 +57,7 @@ extern "C" {
         } \
         else { \
             puts("Cannot debug, stack too small"); \
+            printf("%s: %d/%d\n", sched_active_thread->name, sched_active_thread->stack_size, THREAD_EXTRA_STACKSIZE_PRINTF); \
         } \
     } while (0)
 #else

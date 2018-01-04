@@ -87,6 +87,11 @@ void pm_unblock(unsigned mode)
     irq_restore(state);
 }
 
+uint8_t blocks(unsigned mode)
+{
+	return pm_blocker.val_u8[mode];
+}
+
 #ifndef PROVIDES_PM_LAYERED_OFF
 void  pm_off(void)
 {

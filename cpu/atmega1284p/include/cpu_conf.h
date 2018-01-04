@@ -37,7 +37,7 @@ extern "C" {
 #define THREAD_STACKSIZE_DEFAULT   (256)
 #endif
 
-#define THREAD_STACKSIZE_IDLE      (128)
+#define THREAD_STACKSIZE_IDLE      (512) // increased from 128 to be able to print from idle thread
 /** @} */
 
 #ifdef __cplusplus

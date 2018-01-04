@@ -105,12 +105,12 @@ static void _flush(uart_t uart) {
     mega_uart_t* dev = ctx[uart].dev;
     /* Clears the RX Buffer, but nothing else! */
     /* TODO: Do not use RXC0 for UART1, ... - is this even a problem? */
-    while ( dev->CSRA & (1<< RXC0) ) {
+    while ( dev->CSRA & (1 << RXC0) ) {
         dummy = ctx[uart].dev->DR;
     }
     (void)dummy;
     /* Clears the transmit buffer */
-    //while (!(ctx[uart].dev->CSRA & (1 << UDRE0))) { };
+    while (!(dev->CSRA & (1 << TXC0)) || !(dev->CSRA & (1 << UDRE0))) { };
 }
 
 static void _set_brr(uart_t uart, uint32_t baudrate)
@@ -189,6 +189,7 @@ void uart_write(uart_t uart, const uint8_t *data, size_t len)
         while (!(ctx[uart].dev->CSRA & (1 << UDRE0))) {};
         ctx[uart].dev->DR = data[i];
     }
+    //while (!(ctx[uart].dev->CSRA & (1 << TXC0)) || !(ctx[uart].dev->CSRA & (1 << UDRE0))) { };
 }
 
 static inline void isr_handler(int num)

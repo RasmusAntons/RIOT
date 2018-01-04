@@ -36,6 +36,7 @@
 
 #include "assert.h"
 #include "periph_cpu.h"
+#include <stdint.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,6 +75,8 @@ void pm_unblock(unsigned mode);
  * @param[in]   mode      Target power mode
  */
 void pm_set(unsigned mode);
+
+uint8_t blocks(unsigned mode);
 
 #ifdef __cplusplus
 }
